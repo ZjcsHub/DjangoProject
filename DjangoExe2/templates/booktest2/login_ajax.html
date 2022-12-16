@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script>
+        $(function () {
+            $("#btnLogin").click(function () {
+                // 获取用户名和密码
+                var username = $('input[name=username]').val();
+                var password = $('input[name=password]').val();
+                var CSRF = $('input[name=csrfmiddlewaretoken]').val();
+                $.ajax({
+                    type:'POST',
+                    url:'login_ajax_check',
+                    data: {'username':username,'password':password,'csrfmiddlewaretoken':CSRF},
+                    success:function (data) {
+                        console.log('success',data);
+                    },
+                    error:function (e, state) {
+                        console.log(e);
+                        console.log(state);
+                    }
+                });
+
+            })
+
+        })
+    </script>
+</head>
+<body>
+{% csrf_token %}
+POST:提交的参数在请求头，数据安全性比较高时使用
+GET：提交参数在url中
+<br>
+用户名:<label>
+    <input type="text" name="username">
+</label><br>
+    密码:<label>
+    <input type="password" name="password">
+</label><br>
+<label>
+    <input type="checkbox" name="remember">
+</label>记住用户名<br>
+    <input type="submit" value="登录" id="btnLogin">
+
+</body>
+</html>

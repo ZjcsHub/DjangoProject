@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>省市县选择案例</title>
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script>
+        $(function (){
+            // 获取所有省级地区信息
+            $.get('prov',function (data) {
+
+                var list = data["data"];
+                /*
+                for(var i=0;i<list.length;i++) {
+                    var id = list[i]['id']
+                    var title = list[i]['title']
+                    $('#prov').append('<option value="' + id + '">' + title + '</option>');
+
+                }
+                 */
+                $.each(list,function (i, item) {
+                    var id = item['id']
+                    var title = item['title']
+                    $('#prov').append('<option value="' + id + '">' + title + '</option>');
+                })
+            });
+
+            $('#prov').change(function () {
+                var prov_id = $(this).val();
+                getSubCityData(prov_id,$('#city'));
+            });
+
+            $('#city').change(function () {
+                var city_id = $(this).val();
+                getSubCityData(city_id,$('#area'));
+            })
+
+            function getSubCityData(id,html) {
+                $.get('city',{'id':id},function (data) {
+                    let list = data['data'];
+                    var cityString = ""
+                    $.each(list,function (i,item){
+                        var id = item['id']
+                        var title = item['title']
+                        cityString += '<option value="' + id + '">' + title + '</option>'
+                    })
+                    html.html(cityString);
+                })
+            }
+
+        })
+    </script>
+</head>
+<body>
+<label>
+    <select id="prov">
+        <option> ---- 其选择省 ----</option>
+    </select>
+</label>
+<label>
+    <select id="city">
+        <option> ---- 其选择市 ----</option>
+    </select>
+</label>
+<label>
+    <select id="area">
+        <option> ---- 其选择县 ----</option>
+    </select>
+</label>
+</body>
+</html>

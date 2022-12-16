@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+POST:提交的参数在请求头，数据安全性比较高时使用
+GET：提交参数在url中
+
+<form method="post" action="login_check">
+    {% csrf_token %}
+    用户名:<label>
+    <input type="text" name="username" value="{{ username }}">
+</label><br>
+    密码:<label>
+    <input type="password" name="password">
+</label>
+    <br>
+    验证码:
+    <label>
+        <input type="text" name="viewcode">
+    </label>
+    <img src="view_code" alt="验证码">
+    <br>
+    <label>
+        <input type="checkbox" name="remember">
+    </label>
+    记住用户名<br>
+    <input type="submit" value="登录">
+
+</form>
+</body>
+</html>

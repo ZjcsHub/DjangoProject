@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load filters %}
+<head>
+    <meta charset="UTF-8">
+    <title>模板过滤器</title>
+    <style>
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+所有图书 <br>
+<ul>
+    {% for book in books %}
+        {% if book.id <= 2 %}
+            <li class="green">{{ book.btitle }} -- {{ book.bpubdate | date:'d M Y' }}</li>
+        {% else %}
+            <li class="red">{{ book.btitle }} -- {{ book.bpubdate }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+defalut 过滤器
+{{ content|default:'Hello' }}
+
+<br>
+是否是偶数<br>
+{% if 5|mod %}
+    不是偶数
+{% else %}
+    是偶数
+{% endif %}
+
+
+</body>
+</html>

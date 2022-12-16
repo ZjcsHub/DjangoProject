@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传图片</title>
+</head>
+<body>
+<h1>
+    上传图片
+</h1><br>
+<form method="post" action="{% url 'booktest3:uploadpic' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="pic">
+    <input type="submit" value="上传">
+</form>
+
+</body>
+</html>

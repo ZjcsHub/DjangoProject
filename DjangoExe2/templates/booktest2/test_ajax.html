@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script>
+        $(function () {
+            $('#btnAjax').click(function () {
+                $.ajax({
+                    'url':'ajax_handle',
+                    'dataType':'json'
+                    }).success(function (data) {
+                        alert(data);
+                        console.log(data);
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<input type="button" id="btnAjax" value="ajax请求">
+</body>
+</html>

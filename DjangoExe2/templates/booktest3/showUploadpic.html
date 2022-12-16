@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load filters %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示上传图片</title>
+</head>
+<body>
+
+{% for pic in picList %}
+    <img src="{{ pic.goods_pic|header_image  }}">
+{% endfor %}
+
+</body>
+</html>
