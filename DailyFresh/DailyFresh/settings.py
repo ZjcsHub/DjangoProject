@@ -27,8 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# 设置系统用户
-AUTH_USER_MODEL = 'user.User'
+
 
 # Application definition
 
@@ -148,3 +147,26 @@ EMAIL_HOST_USER = 'keats_zhao@163.com'
 EMAIL_HOST_PASSWORD = 'VDBMIKQSXPIHOUPG'
 #收件人看到的发件人
 EMAIL_FROM = 'keats_zhao<keats_zhao@163.com>'
+
+
+# 配置必须登录时的url
+LOGIN_URL = '/user/login'
+# 设置系统用户
+AUTH_USER_MODEL = 'user.User'
+
+# 使用redis配置缓存
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+# 配置使用redis缓存session信息
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
+# 指定我们的文件上传项
+DEFAULT_FILE_STORAGE = 'util.fdfs.storage.FDFSStorage'
