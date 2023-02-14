@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatGPT</title>
+</head>
+<body>
+<h1>欢迎使用ChatGPT系统</h1>
+<form method="post">
+    请输入你的问题：<input name="q" type="text">
+    <input type="submit">
+</form>
+{% if content %}
+    {% for text in content %}
+{#        <ul>#}
+{#        <li>{{ text }}</li>#}
+{#        </ul>#}
+        <p>{{ text }}</p>
+    {% endfor %}
+
+{% endif %}
+</body>
+</html>
