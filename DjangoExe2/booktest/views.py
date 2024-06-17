@@ -63,7 +63,7 @@ def show_areas(request,p_index):
     '''显示所有省份信息'''
     areas = AreaInfo.objects.filter(aParent__isnull=True)
     # 分页
-    paginator = Paginator(areas,10)
+    paginator = Paginator(areas,20)
     print(paginator.num_pages) # 页码数
     print(paginator.page_range) # 页码列表
     # 获取第一页内容

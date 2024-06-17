@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import BookInfo,HeroInfo
+from urllib.request import urlopen
+import requests
+
 # Create your views here.
 
 # 定义视图函数 HttpRequest
@@ -40,3 +43,17 @@ def detail(request,bid):
     # 查询和book关联的信息
     heros = book.heroinfo_set.all()
     return render(request,'booktest/detail.html',{'book':book,'heros':heros})
+
+
+def redirectDemo(request):
+    url = 'http://www.zdfit.net/maps_en.html'
+
+    # 使用Python的urllib库打开远程URL
+    response = requests.get(url)
+    return HttpResponse(response.content)
+
+
+from revproxy.views import ProxyView
+
+class TestProxyView(ProxyView):
+    upstream = 'http://www.zdfit.net/maps_en.html'
